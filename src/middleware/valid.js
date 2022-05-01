@@ -8,19 +8,19 @@ const validateAuthor = async function (req, res, next) {
 
         if (Object.keys(data).length != 0) {
             if (data.firstname === undefined) {
-                return res.status(400).send({ status: false, msg: "Firstname Required !!" });
+                return res.status(400).send({ status: false, msg: "Firstname Missing !!" });
             }
             if (data.lastname === undefined) {
-                return res.status(400).send({ status: false, msg: "Lastname Required !!" });
+                return res.status(400).send({ status: false, msg: "Lastname Missing !!" });
             }
             if (data.title === undefined) {
-                return res.status(400).send({ status: false, msg: "Title Required !!" });
+                return res.status(400).send({ status: false, msg: "Title Missing!!" });
             }
             if (data.email === undefined) {
-                return res.status(400).send({ status: false, msg: "Email Required !!" });
+                return res.status(400).send({ status: false, msg: "Email Missing !!" });
             }
             if (data.password === undefined) {
-                return res.status(400).send({ status: false, msg: "Password Required !!" });
+                return res.status(400).send({ status: false, msg: "Password Missing !!" });
             }
         }
         else {
@@ -59,16 +59,16 @@ const validateblog = async function (req, res, next) {
 
         if (Object.keys(data).length != 0) {
             if (data.title === undefined) {
-                return res.status(400).send({ status: false, msg: "Title missing!!" });
+                return res.status(400).send({ status: false, msg: "TITLE MISSING!!" });
             }
             if (data.body === undefined) {
-                return res.status(400).send({ status: false, msg: "Blog Body required!!" });
+                return res.status(400).send({ status: false, msg: "BODY MISSING!!" });
             }
             if (data.authorId === undefined) {
-                return res.status(400).send({ status: false, msg: "AuthrId is Required!!" });
+                return res.status(400).send({ status: false, msg: "AUTHORID MISSSING!!" });
             }
             if (data.category === undefined) {
-                return res.status(400).send({ status: false, msg: "Category is Required!!" });
+                return res.status(400).send({ status: false, msg: "ENTER VALID AUTHORID!!!" });
             }
         }
         else {
@@ -76,21 +76,21 @@ const validateblog = async function (req, res, next) {
         }
 
         if (Object.values(title).length <= 0) {
-            return res.status(400).send("TITLE MISSING!!");
+            return res.status(400).send({status:false, msg:"Title is Required!!"});
         }
         if (Object.values(body).length <= 0) {
-            return res.status(400).send("BODY MISSING!!");
+            return res.status(400).send({status:false, msg:"blog body is Required!!"});
         }
         if (Object.values(authorId).length <= 0) {
-            return res.status(400).send("AUTHORID MISSSING!!");
+            return res.status(400).send({status:false, msg:"Author id is Required!!"});
         }
 
         let authorid = await authorModel.findById(authorId)
         if (!authorid) {
-            return res.status(400).send('ENTER VALID AUTHORID!!');
+            return res.status(400).send('Enter a valid Author id!!');
         }
         if (Object.values(category).length <= 0) {
-            return res.status(400).send("CATEGORY MISSING!!");
+            return res.status(400).send({status:false, msg:"Category is Required!!"});
         } else {
             next()
         }
