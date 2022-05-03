@@ -1,6 +1,6 @@
 const authorModel = require('../models/authorModel');
 
-// amitvsk //Kirtan-G
+
 const validateAuthor = async function (req, res, next) {
     try {
         let data = req.body
@@ -51,7 +51,6 @@ const validateAuthor = async function (req, res, next) {
 }
 module.exports.validateAuthor = validateAuthor;
 
-// amitvsk //Kirtan-G //Salman-110
 const validateblog = async function (req, res, next) {
     try {
         let data = req.body
