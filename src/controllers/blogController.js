@@ -1,7 +1,7 @@
 const blogModel = require('../models/blogModel');
 
 
-// Kirtan-G
+
 const createBlog = async function (req, res) {
     try {
         let Blogs = req.body;
@@ -15,7 +15,7 @@ const createBlog = async function (req, res) {
 module.exports.createBlog = createBlog;
 
 
-// amitvsk
+
 const getBlogs = async function (req, res) {
     try {
         let data = req.query
@@ -35,7 +35,6 @@ const getBlogs = async function (req, res) {
 module.exports.getBlogs = getBlogs;
 
 
-// Salman-110
 const updateblogs = async function (req, res) {
     try {
         let Id = req.params.blogId;
@@ -79,7 +78,7 @@ const updateblogs = async function (req, res) {
 module.exports.updateblogs = updateblogs;
 
 
-// Kirtan-G
+
 const deleteBlogs = async function (req, res) {
     try {
         let blogId = req.params.blogId;
@@ -120,31 +119,30 @@ const deleteBlogs = async function (req, res) {
 module.exports.deleteBlogs = deleteBlogs;
 
 
-// Salman-110
 const queryDeleted = async function (req, res) {
     try {
         let data = req.query;
-        let blog = req.params.blogId;
+        let author = req.query.authorId;
 
-        // checking length of blogid if greather than 24 then send error
-        if (blog.length < 24) {
-            return res.status(400).send('bad request');
+        if (!author) {
+            return res.status(400).send({ status: false, msg: "Plz Enter authorId In Query" });
         }
 
         let valid = await blogModel.findOne(data);
         if (!valid) {
             return res.status(404).send({ status: false, msg: "Data doesn't exit!!" })
         }
+
         if (Object.values(data).length <= 0) {
             return res.status(400).send({ status: false, msg: "Input Missing" });
         }
 
         let deleted = await blogModel.findOneAndUpdate(data, { isDeleted: true }, { new: true });
         if (deleted.isDeleted == true) {
-            let update = await blogModel.findOneAndUpdate({ _id: blog }, { deletedAt: new String(Date()) });
+            let update = await blogModel.findOneAndUpdate(data, { deletedAt: new String(Date()) });
         }
         if (deleted.isDeleted == false) {
-            let update = await blogModel.findOneAndUpdate({ _id: blog }, { deletedAt: null });
+            let update = await blogModel.findOneAndUpdate(data, { deletedAt: null });
         }
         return res.status(200).send({ status: true, data: deleted });
     }
