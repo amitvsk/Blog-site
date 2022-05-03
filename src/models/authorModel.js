@@ -1,4 +1,4 @@
-// vinitchikate
+
 const mongoose = require('mongoose');
 
 const authorSchema = new mongoose.Schema(
@@ -25,6 +25,6 @@ const authorSchema = new mongoose.Schema(
             type: String,
             required: true
         }
-    }, { timeseries: true });
+    }, { timestamp: true });
 
 module.exports = mongoose.model('authorproject1', authorSchema)
