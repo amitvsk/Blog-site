@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const blogModel = require("../models/blogModel");
 
-// Kirtan-G
+
 const Authentication = async function (req, res, next) {
     try {
         // getting token from req(header)
@@ -27,7 +27,7 @@ const Authentication = async function (req, res, next) {
 }
 module.exports.Authentication = Authentication;
 
-// Salman-110 //amitvsk
+
 const Authrization = async function (req, res, next) {
     try {
         let token = req.headers["x-api-key"];
